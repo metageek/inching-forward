@@ -13,9 +13,15 @@ function loadPhotos() {
 
 function showPhotos(photos) {
     var ctx=document.getElementById('canvas').getContext('2d')
-    var img=new Image();
-    img.addEventListener('load', function() {
-        ctx.drawImage(img, 0, 0);
+    photos.forEach(function(photo) {
+        var img=new Image();
+        img.addEventListener('load', function() {
+            var x = photo['X'];
+            var y = photo['Y'];
+            if (x != null && y != null) {
+                ctx.drawImage(img, x, y);
+            }
+        });
+        img.src='thumbnails/'+photo['File'];
     });
-    img.src='thumbnails/'+photos[0]['File'];
 }
